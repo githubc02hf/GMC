@@ -14,7 +14,7 @@ public class EBike {
     @Getter
     @Setter
     @Column(name="ebike_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Getter

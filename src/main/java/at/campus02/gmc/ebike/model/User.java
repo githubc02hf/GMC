@@ -14,7 +14,7 @@ public class User {
     @Getter
     @Setter
     @Column(name="user_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Getter
@@ -32,7 +32,7 @@ public class User {
     @Column(name="user_email")
     private String email;
 
-    @ManyToOne()
+    @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name="address_id")
     @Getter
     @Setter
@@ -40,7 +40,7 @@ public class User {
 
     @Getter
     @Setter
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Invoice> invoices;
 
 }

@@ -13,7 +13,7 @@ public class Address {
     @Column(name="address_id")
     @Getter
     @Setter
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Getter
@@ -24,7 +24,7 @@ public class Address {
     @Getter
     @Setter
     @Column(name="address_streetnumber")
-    private String streetNumber;
+    private Integer streetNumber;
 
     @Getter
     @Setter
@@ -36,7 +36,7 @@ public class Address {
     @Column(name="address_city")
     private String city;
 
-    @OneToMany(mappedBy = "address")
+    @OneToMany(mappedBy = "address",  cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @Setter
     @Getter
     private List<User> users;

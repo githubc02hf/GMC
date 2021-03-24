@@ -14,7 +14,7 @@ public class RentStation {
     @Getter
     @Setter
     @Column(name="rentstation_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Getter

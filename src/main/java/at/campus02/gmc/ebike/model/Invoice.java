@@ -15,7 +15,7 @@ public class Invoice {
     @Getter
     @Setter
     @Column(name="invoice_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Getter
