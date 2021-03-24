@@ -1,5 +1,6 @@
 package at.campus02.gmc.ebike.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,6 +37,7 @@ public class User {
     @JoinColumn(name="address_id")
     @Getter
     @Setter
+    @JsonBackReference
     private Address address;
 
     @Getter

@@ -44,8 +44,8 @@ public class UserController {
 
     @GetMapping(path = "/login")
     public @ResponseBody
-    Iterable<User> getAllUsers() {
+    Integer loginUser(@RequestParam String email) {
         // This returns a JSON or XML with the users
-        return userRepository.findAll();
+        return userRepository.queryBy(email).getId();
     }
 }
