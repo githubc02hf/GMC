@@ -1,5 +1,6 @@
 package at.campus02.gmc.ebike.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,11 +27,13 @@ public class RentStation {
     @JoinColumn(name = "address_id")
     @Getter
     @Setter
+    @JsonBackReference
     private Address address;
 
     @OneToMany(mappedBy = "rentStation")
     @Setter
     @Getter
+    @JsonBackReference
     private List<EBike> ebikeList;
 
 }

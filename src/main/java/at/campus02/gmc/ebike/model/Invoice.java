@@ -1,5 +1,6 @@
 package at.campus02.gmc.ebike.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.dao.DataAccessException;
@@ -32,6 +33,7 @@ public class Invoice {
     @Setter
     @ManyToOne()
     @JoinColumn(name="user_id")
+    @JsonBackReference
     private User user;
 
     @Getter
