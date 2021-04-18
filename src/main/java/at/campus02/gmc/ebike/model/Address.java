@@ -33,6 +33,16 @@ public class Address {
 
     @Getter
     @Setter
+    @Column(name="address_latitude")
+    private Double latitude;
+
+    @Getter
+    @Setter
+    @Column(name="address_longitude")
+    private Double longitude;
+
+    @Getter
+    @Setter
     @Column(name="address_city")
     private String city;
 
