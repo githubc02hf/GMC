@@ -14,9 +14,9 @@ VALUES ('Graz', 8020, 'Mühlgasse', 54, 47.07452029552643, 15.42549821358661),
 
 #fill rentstation
 INSERT INTO rentstation(rentstation_capacity, address_id)
-VALUES (20, 3),
-       (10, 5),
-       (5, 7);
+VALUES (20, 1),
+       (10, 0),
+       (5, 2);
 #fill ebike
 INSERT INTO ebike(ebike_model, rentstation_id)
 VALUES ('Turbo Vado SL', 1),
