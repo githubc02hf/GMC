@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.persistence.criteria.CriteriaBuilder;
-
 @Controller // This means that this class is a Controller
 @RequestMapping(path = "/users") // This means URL's start with /demo (after Application path)
 public class UserController {
@@ -58,5 +56,14 @@ public class UserController {
         return userRepository.queryBy(email);
     }
 
+    @PostMapping(path = "/profile/edit")
+    public @ResponseBody
+    void editUserPassword(@RequestParam String email, @RequestParam String password) {
+
+        User user = userRepository.queryBy(email);
+        user.setPassword(password);
+
+        userRepository.save(user);
+    }
 
 }
