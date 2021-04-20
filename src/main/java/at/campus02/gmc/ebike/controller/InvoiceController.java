@@ -8,10 +8,7 @@ import at.campus02.gmc.ebike.repository.InvoiceRepository;
 import at.campus02.gmc.ebike.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -35,7 +32,7 @@ public class InvoiceController {
         return invoiceRepository.queryBy(email);
     }
 
-    @GetMapping("/rentBike")
+    @PostMapping("/rentBike")
     public @ResponseBody
     Invoice rentBike(@RequestParam Integer stationId, @RequestParam String email) {
 //      find free bike
