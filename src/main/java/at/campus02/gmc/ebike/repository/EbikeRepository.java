@@ -9,10 +9,12 @@ import java.util.List;
 
 public interface EbikeRepository extends CrudRepository<EBike, Integer> {
 
-    @Query(value = "SELECT ebike FROM EBike ebike " +
-            "INNER JOIN FETCH ebike.invoices inv " +
-            "WHERE ebike.rentStation.id = :stationId " +
-            "AND inv.endDate IS NOT NULL ")
+    @Query(nativeQuery = true,
+            value = "SELECT DISTINCT eb.* " +
+                    "FROM ebike eb " +
+                    "WHERE eb.ebike_id IN (SELECT bike.ebike_id FROM ebike bike where bike.rentstation_id = :stationId) " +
+                    "AND (NOT EXISTS(SELECT * FROM invoice inv where inv.ebike_id = eb.ebike_id AND inv.invoice_enddate IS NULL) " +
+                    "or NOT EXISTS(SELECT * FROM invoice inv2 where inv2.ebike_id = eb.ebike_id));")
     List<EBike> queryBy(@Param("stationId") Integer stationId);
 
 }

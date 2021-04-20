@@ -1,14 +1,14 @@
 package at.campus02.gmc.ebike.controller;
 
+import at.campus02.gmc.ebike.DTO.RentStationDTO;
 import at.campus02.gmc.ebike.model.EBike;
-import at.campus02.gmc.ebike.model.Invoice;
 import at.campus02.gmc.ebike.model.RentStation;
-import at.campus02.gmc.ebike.repository.InvoiceRepository;
 import at.campus02.gmc.ebike.repository.RentStationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,22 +20,26 @@ public class RentStationController {
 
     @GetMapping(path = "/allStations")
     public @ResponseBody
-    List<RentStation> getAllStations() {
-        List<RentStation> out = rentstationRepository.findAll();
-        System.out.println("my out = "+ out.get(1).getAddress().getLatitude());
-        return out;
+    List<RentStationDTO> getAllStations() {
+        List<RentStation> rentStations = rentstationRepository.findAll();
+
+        return mapRentStationsToDTO(rentStations);
     }
 
-    @PostMapping(path = "/rentBike")
-    public @ResponseBody
-    EBike rentBike(@RequestParam Integer stationId, @RequestParam Integer userId) {
-        // TODO: find free bike
-        // RentStation rentStation = rentstationRepository.getEBike(stationId);
-        // TODO: Invoice öffnen
-        // TODO: Capacity reduzieren
+    private List<RentStationDTO> mapRentStationsToDTO(List<RentStation> rentStations){
+        List<RentStationDTO> rentStationDTOList = new ArrayList<>();
 
-        // return rentStation.getEbikeList().get(1);
-        return null;
+        for (RentStation rentStation : rentStations){
+            RentStationDTO rentStationDTO = new RentStationDTO();
+
+            rentStationDTO.setAddress(rentStation.getAddress());
+            rentStationDTO.setId(rentStation.getId());
+            rentStationDTO.setCapacity(rentStation.getCapacity());
+            rentStationDTO.setEbikeList(rentStation.getEbikeList());
+
+            rentStationDTOList.add(rentStationDTO);
+        }
+        return rentStationDTOList;
     }
 
 
