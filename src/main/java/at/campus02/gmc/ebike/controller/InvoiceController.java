@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/invoices")
@@ -48,6 +49,24 @@ public class InvoiceController {
         return newInvoice;
     }
 
+    @PostMapping("/endRent")
+    public @ResponseBody
+    Invoice endRent(@RequestParam Integer invoiceId) {
+        Optional<Invoice> invoiceOptional = invoiceRepository.findById(invoiceId);
+        Invoice invoice;
+
+        if (invoiceOptional.isPresent()) {
+            invoice = invoiceOptional.get();
+        }else {
+            return null;
+        }
+
+        invoice.setEndDate(new Date());
+        invoice = invoiceRepository.save(invoice);
+
+        return invoice;
+    }
+
     private Invoice createInvoice(EBike availableEbike, User currentUser) {
         Invoice invoice = new Invoice();
         invoice.setUser(currentUser);
@@ -61,7 +80,7 @@ public class InvoiceController {
         List<EBike> eBikes = ebikeRepository.queryBy(stationId);
 
         EBike availableEbike;
-        if (!eBikes.isEmpty()){
+        if (!eBikes.isEmpty()) {
             availableEbike = eBikes.get(0);
         } else {
             return null;
