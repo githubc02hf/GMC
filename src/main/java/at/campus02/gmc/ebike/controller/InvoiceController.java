@@ -36,13 +36,17 @@ public class InvoiceController {
     @PostMapping("/rentBike")
     public @ResponseBody
     Invoice rentBike(@RequestParam Integer stationId, @RequestParam String email) {
-//      find free bike
+
+        // find available EBike
         EBike availableEbike = getAvailableEbike(stationId);
+
         if (availableEbike == null) return null;
+        // check if user currently rents a bike
+        Invoice openInvoice = invoiceRepository.queryBy(email);
+        if (openInvoice != null) return null;
 
+        // create new invoice for user
         User currentUser = userRepository.queryBy(email);
-
-        // Invoice öffnen
         Invoice newInvoice = createInvoice(availableEbike, currentUser);
         invoiceRepository.save(newInvoice);
 
