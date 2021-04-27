@@ -15,4 +15,6 @@ public interface UserRepository extends CrudRepository<User, Integer> {
             "WHERE u.email = :email")
     User queryBy(@Param("email") String email);
 
+    User queryByEmailAndPassword(@Param("email") String email, @Param("password") String password);
+
 }
