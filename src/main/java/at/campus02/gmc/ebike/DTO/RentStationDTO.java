@@ -25,4 +25,8 @@ public class RentStationDTO {
     @Getter
     private List<EBike> ebikeList;
 
+    @Setter
+    @Getter
+    private Integer availableBikes;
+
 }
