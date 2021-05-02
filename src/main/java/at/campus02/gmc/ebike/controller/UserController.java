@@ -44,13 +44,9 @@ public class UserController {
 
     @GetMapping(path = "/login")
     public @ResponseBody
-    Integer loginUser(@RequestParam String email) {
-
-        User user = userRepository.queryBy(email);
-        if (user != null) {
-            return user.getId();
-        }
-        return null;
+    User loginUser(@RequestParam String email, @RequestParam String password) {
+        // This returns a JSON or XML with the users
+        return userRepository.queryByEmailAndPassword(email, password);
     }
 
     @GetMapping(path = "/profile")
@@ -61,12 +57,15 @@ public class UserController {
 
     @PostMapping(path = "/profile/edit")
     public @ResponseBody
-    void editUser(@RequestParam String email, @RequestParam String password) {
+    User editUser(@RequestParam String email, @RequestParam String password, @RequestParam String firstName,
+                  @RequestParam String lastName) {
 
         User user = userRepository.queryBy(email);
         user.setPassword(password);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
 
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
 }

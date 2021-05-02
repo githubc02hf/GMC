@@ -2,6 +2,7 @@ package at.campus02.gmc.ebike.controller;
 
 import at.campus02.gmc.ebike.DTO.RentStationDTO;
 import at.campus02.gmc.ebike.model.EBike;
+import at.campus02.gmc.ebike.model.Invoice;
 import at.campus02.gmc.ebike.model.RentStation;
 import at.campus02.gmc.ebike.repository.RentStationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,14 +33,30 @@ public class RentStationController {
         for (RentStation rentStation : rentStations) {
             RentStationDTO rentStationDTO = new RentStationDTO();
 
+            rentStation.getAddress().setUsers(null);
             rentStationDTO.setAddress(rentStation.getAddress());
             rentStationDTO.setId(rentStation.getId());
             rentStationDTO.setCapacity(rentStation.getCapacity());
             rentStationDTO.setEbikeList(rentStation.getEbikeList());
+            rentStationDTO.setAvailableBikes(getOnlyAvailableBikes(rentStation.getEbikeList()));
 
             rentStationDTOList.add(rentStationDTO);
         }
         return rentStationDTOList;
+    }
+
+    private Integer getOnlyAvailableBikes(List<EBike> eBikes) {
+        int availableBikesCount = eBikes.size();
+        for (EBike eBike : eBikes) {
+            for (Invoice invoice : eBike.getInvoices()) {
+                if(invoice.getEndDate() == null){
+                    availableBikesCount--;
+                    break;
+                }
+            }
+        }
+
+        return availableBikesCount;
     }
 
 

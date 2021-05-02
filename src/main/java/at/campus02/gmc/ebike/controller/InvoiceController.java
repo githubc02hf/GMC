@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +40,11 @@ public class InvoiceController {
 
         // find available EBike
         EBike availableEbike = getAvailableEbike(stationId);
+
         if (availableEbike == null) return null;
+        // check if user currently rents a bike
+        Invoice openInvoice = invoiceRepository.queryBy(email);
+        if (openInvoice != null) return null;
 
         // check if user currently rents a bike
         Invoice openInvoice = invoiceRepository.queryBy(email);
@@ -55,7 +60,7 @@ public class InvoiceController {
 
     @PostMapping("/endRent")
     public @ResponseBody
-    Invoice endRent(@RequestParam Integer invoiceId) {
+    Invoice endRent(@RequestParam Integer invoiceId, @RequestParam String endDate) {
         Optional<Invoice> invoiceOptional = invoiceRepository.findById(invoiceId);
         Invoice invoice;
 
@@ -65,7 +70,8 @@ public class InvoiceController {
             return null;
         }
 
-        invoice.setEndDate(new Date());
+        var instant = Instant.ofEpochMilli(Long.parseLong(endDate));
+        invoice.setEndDate(Date.from(instant));
         invoice = invoiceRepository.save(invoice);
 
         return invoice;
