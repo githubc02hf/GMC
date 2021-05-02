@@ -11,7 +11,6 @@ import org.springframework.data.repository.query.Param;
 public interface UserRepository extends CrudRepository<User, Integer> {
 
     @Query(value = "SELECT u FROM User u " +
-            "INNER JOIN FETCH u.address " +
             "WHERE u.email = :email")
     User queryBy(@Param("email") String email);
 

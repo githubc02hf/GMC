@@ -46,11 +46,6 @@ public class Address {
     @Column(name="address_city")
     private String city;
 
-    @OneToMany(mappedBy = "address",  cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @Setter
-    @Getter
-    private List<User> users;
-
     @OneToOne(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private RentStation rentStation;
 }

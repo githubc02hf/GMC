@@ -33,10 +33,8 @@ public class RentStationController {
         for (RentStation rentStation : rentStations) {
             RentStationDTO rentStationDTO = new RentStationDTO();
 
-            rentStation.getAddress().setUsers(null);
             rentStationDTO.setAddress(rentStation.getAddress());
             rentStationDTO.setId(rentStation.getId());
-            rentStationDTO.setCapacity(rentStation.getCapacity());
             rentStationDTO.setEbikeList(rentStation.getEbikeList());
             rentStationDTO.setAvailableBikes(getOnlyAvailableBikes(rentStation.getEbikeList()));
 

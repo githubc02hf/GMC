@@ -38,13 +38,6 @@ public class User {
     @Column(name="user_email")
     private String email;
 
-    @ManyToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="address_id")
-    @Getter
-    @Setter
-    @JsonBackReference
-    private Address address;
-
     @Getter
     @Setter
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

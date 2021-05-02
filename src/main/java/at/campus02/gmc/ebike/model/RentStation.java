@@ -18,11 +18,6 @@ public class RentStation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Getter
-    @Setter
-    @Column(name="rentstation_capacity")
-    private Integer capacity;
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id")
     @Getter

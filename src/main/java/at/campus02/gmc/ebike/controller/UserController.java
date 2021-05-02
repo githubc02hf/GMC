@@ -1,6 +1,5 @@
 package at.campus02.gmc.ebike.controller;
 
-import at.campus02.gmc.ebike.model.Address;
 import at.campus02.gmc.ebike.model.User;
 import at.campus02.gmc.ebike.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +28,6 @@ public class UserController {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
-
-        Address address = new Address();
-        address.setCity(city);
-        address.setPostalCode(postalCode);
-        address.setStreetName(street);
-        address.setStreetNumber(streetNumber);
-
-        user.setAddress(address);
 
         user = userRepository.save(user);
         return user.getId();

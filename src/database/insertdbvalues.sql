@@ -4,19 +4,15 @@ USE ebike;
 
 #fill address
 INSERT INTO address(address_city, address_postalcode, address_streetname, address_streetnumber, address_latitude, address_longitude )
-VALUES ('Graz', 8020, 'Mühlgasse', 54, 47.07452029552643, 15.42549821358661),
-       ('Graz', 8020, 'Babenbergerstraße', 11, 47.072486535942986, 15.42078442708091),
-       ('Graz', 8020, 'Europaplatz', 6, 47.073068252434844, 15.417795002967065),
-       ('Graz', 8010, 'Girardigasse', 3, 47.068525432531004, 15.445492647961132),
+VALUES ('Graz', 8020, 'Europaplatz', 6, 47.073068252434844, 15.417795002967065),
        ('Graz', 8010, 'Karmeliterplatz', 3, 47.07437348642562, 15.441010953231684),
-       ('Graz', 8010, 'Peinlichgasse', 8, 47.08006828402197, 15.440443700400435),
        ('Graz', 8020, 'Fabriksgasse', 29, 47.05925813002857, 15.42649647049234);
 
 #fill rentstation
-INSERT INTO rentstation(rentstation_capacity, address_id)
-VALUES (20, 1),
-       (10, 0),
-       (5, 2);
+INSERT INTO rentstation(address_id)
+VALUES (1),
+       (2),
+       (3);
 #fill ebike
 INSERT INTO ebike(ebike_model, rentstation_id)
 VALUES ('Turbo Vado SL', 1),
@@ -28,11 +24,11 @@ VALUES ('Turbo Vado SL', 1),
 
 
 #fill user
-INSERT INTO user (user_password, user_email, user_firstname, user_lastname, address_id)
-VALUES ('1234','maxMustermann@gmail.com', 'Max', 'Mustermann', 2),
-       ('1234','AnnaBanana@gmx.de', 'Anna', 'Gelb', 1),
-       ('1234','myBestMail@anonymous.com', 'ano', 'nymos', 4),
-       ('1234','PetraMeier@gmail.com', 'Petra', 'Meier', 6);
+INSERT INTO user (user_password, user_email, user_firstname, user_lastname)
+VALUES ('1234','maxMustermann@gmail.com', 'Max', 'Mustermann'),
+       ('1234','AnnaBanana@gmx.de', 'Anna', 'Gelb'),
+       ('1234','myBestMail@anonymous.com', 'ano', 'nymos'),
+       ('1234','PetraMeier@gmail.com', 'Petra', 'Meier');
 
 
 #fill invoice
