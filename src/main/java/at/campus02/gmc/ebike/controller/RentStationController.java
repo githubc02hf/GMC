@@ -26,10 +26,10 @@ public class RentStationController {
         return mapRentStationsToDTO(rentStations);
     }
 
-    private List<RentStationDTO> mapRentStationsToDTO(List<RentStation> rentStations){
+    private List<RentStationDTO> mapRentStationsToDTO(List<RentStation> rentStations) {
         List<RentStationDTO> rentStationDTOList = new ArrayList<>();
 
-        for (RentStation rentStation : rentStations){
+        for (RentStation rentStation : rentStations) {
             RentStationDTO rentStationDTO = new RentStationDTO();
 
             rentStationDTO.setAddress(rentStation.getAddress());

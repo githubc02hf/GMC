@@ -22,7 +22,7 @@ public class UserController {
     public @ResponseBody
     Integer registerUser(@RequestParam String firstName, @RequestParam String lastName
             , @RequestParam String password, @RequestParam String email, @RequestParam String city
-            ,@RequestParam String street, @RequestParam Integer streetNumber, @RequestParam Integer postalCode) {
+            , @RequestParam String street, @RequestParam Integer streetNumber, @RequestParam Integer postalCode) {
 
         User user = new User();
         user.setPassword(password);
@@ -30,7 +30,6 @@ public class UserController {
         user.setLastName(lastName);
         user.setEmail(email);
 
-//        TODO does address already exists?
         Address address = new Address();
         address.setCity(city);
         address.setPostalCode(postalCode);
@@ -46,8 +45,12 @@ public class UserController {
     @GetMapping(path = "/login")
     public @ResponseBody
     Integer loginUser(@RequestParam String email) {
-        // This returns a JSON or XML with the users
-        return userRepository.queryBy(email).getId();
+
+        User user = userRepository.queryBy(email);
+        if (user != null) {
+            return user.getId();
+        }
+        return null;
     }
 
     @GetMapping(path = "/profile")
@@ -58,7 +61,7 @@ public class UserController {
 
     @PostMapping(path = "/profile/edit")
     public @ResponseBody
-    void editUserPassword(@RequestParam String email, @RequestParam String password) {
+    void editUser(@RequestParam String email, @RequestParam String password) {
 
         User user = userRepository.queryBy(email);
         user.setPassword(password);
