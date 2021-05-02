@@ -46,6 +46,10 @@ public class InvoiceController {
         Invoice openInvoice = invoiceRepository.queryBy(email);
         if (openInvoice != null) return null;
 
+        // check if user currently rents a bike
+        Invoice openInvoice = invoiceRepository.queryBy(email);
+        if (openInvoice != null) return null;
+
         // create new invoice for user
         User currentUser = userRepository.queryBy(email);
         Invoice newInvoice = createInvoice(availableEbike, currentUser);
@@ -62,7 +66,7 @@ public class InvoiceController {
 
         if (invoiceOptional.isPresent()) {
             invoice = invoiceOptional.get();
-        }else {
+        } else {
             return null;
         }
 
