@@ -58,7 +58,7 @@ public class UserController {
 
     @PostMapping(path = "/profile/edit")
     public @ResponseBody
-    void editUser(@RequestParam String email, @RequestParam String password, @RequestParam String firstName,
+    User editUser(@RequestParam String email, @RequestParam String password, @RequestParam String firstName,
                   @RequestParam String lastName) {
 
         User user = userRepository.queryBy(email);
@@ -66,7 +66,7 @@ public class UserController {
         user.setFirstName(firstName);
         user.setLastName(lastName);
 
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
 }
