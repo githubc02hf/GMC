@@ -20,9 +20,10 @@ public class UserController {
     @PostMapping(path = "/register")
     public @ResponseBody
     Integer registerUser(@RequestParam String firstName, @RequestParam String lastName
-            , @RequestParam String password, @RequestParam String email, @RequestParam String city
-            , @RequestParam String street, @RequestParam Integer streetNumber, @RequestParam Integer postalCode) {
+            , @RequestParam String password, @RequestParam String email) {
 
+        User userExists = userRepository.queryBy(email);
+        if (userExists!=null){ return null;}
         User user = new User();
         user.setPassword(password);
         user.setFirstName(firstName);
